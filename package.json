@@ -1,0 +1,27 @@
+{
+  "name": "cleanblog_node",
+  "version": "1.0.0",
+  "description": "CleanBlog new project with node js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Omar0538/CleanBlog_node.git"
+  },
+  "author": "Omar Sultanov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Omar0538/CleanBlog_node/issues"
+  },
+  "homepage": "https://github.com/Omar0538/CleanBlog_node#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "prettier": "2.4.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
