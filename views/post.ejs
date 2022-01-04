@@ -12,10 +12,14 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1><%=post.title%></h1>
-            <h2 class="subheading"><%= post.details %></h2>
+            <h2 class="subheading"><%= post.detail %></h2>
             <span class="meta">Posted by
               <a href="#">Start Bootstrap</a>
               <%=post.dateCreated %></span>
+          </div>
+          <div class="button-group">
+              <a href='/posts/edit/<%=post._id %>' class="btn btn-primary my-5">UPDATE</a>
+              <a href='/posts/<%=post._id %>?_method=DELETE' onclick="return confirm('ARE YOU SURE')" class="btn btn-danger my-5">DELETE</a>
           </div>
         </div>
       </div>

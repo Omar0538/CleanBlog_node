@@ -1,11 +1,12 @@
 const express = require('express');
+var methodOverride = require('method-override');
+
 const app = express();
 const mongoose = require('mongoose');
 const { urlencoded, json } = require('express');
 const ejs = require('ejs');
-
-const Post = require('./models/Post');
-
+const photoController=require("./controllers/photoController")
+const pageController=require("./controllers/pageController")
 const port = 3000;
 
 mongoose.connect('mongodb://localhost/cleanblog-test-db', {
@@ -20,31 +21,22 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(urlencoded({ extended: false }));
 app.use(json());
+app.use(
+  methodOverride('_method', {
+    methods: ['POST', 'GET'],
+  })
+);
 
-app.get('/', async (req, res) => {
-  const posts = await Post.find({});
-  res.render('index', {
-    posts,
-  });
-});
-app.get('/add_post', (req, res) => {
-  res.render('add_post');
-});
-app.get('/post/:id', async (req, res) => {
-  const id = req.params.id;
-  const post = await Post.findById(id);
-  res.render('post', {
-    post,
-  });
-});
-app.get('/about', (req, res) => {
-  res.render('about');
-});
+app.get('/',photoController.getAllPosts);
+app.post('/posts',photoController.createPost);
+app.put('/posts/:id',photoController.updatePost)
+app.delete('/posts/:id',photoController.deletePost)
+app.get('/posts/:id',photoController.getPost);
 
-app.post('/posts', (req, res) => {
-  Post.create(req.body);
-  res.redirect('/');
-});
+app.get('/add_post', pageController.getAddPage);
+app.get('/about',pageController.getAboutPage);
+app.get('/posts/edit/:id', pageController.getEditPage);
+
 app.listen(port, () => {
   console.log(`Our server is getting start with this port:${port}`);
 });
